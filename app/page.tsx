@@ -47,7 +47,7 @@ export default function HomePage() {
       <div className="w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl bg-white/90 backdrop-blur-lg rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 border-4 border-amber-200 relative z-10 animate-fade-in">
         {/* Header Section */}
         <div className="text-center space-y-3 sm:space-y-4">
-          <div className="text-5xl sm:text-6xl md:text-7xl mb-2 sm:mb-4 animate-bounce">🍽️</div>
+          <div className="text-5xl sm:text-6xl md:text-7xl mb-2 sm:mb-4">🍽️</div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-800 tracking-tight drop-shadow-lg animate-slide-up">
             Chef Subhan&apos;s Kitchen
           </h1>
@@ -71,6 +71,15 @@ export default function HomePage() {
             </Button>
           </Link>
         </div>
+        <div className="absolute top-6 right-6 z-50">
+  <Link href="/feedback">
+    <Button className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2 rounded-full shadow-lg hover:animate-none transition-all duration-300">
+      💬 Feedback
+    </Button>
+  </Link>
+</div>
+
+        
 
         {/* Cooking Instructions */}
         <div className="bg-amber-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-amber-200 animate-slide-up" style={{ animationDelay: '0.8s' }}>
@@ -96,7 +105,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="animate-slide-up" style={{ animationDelay: '1.6s' }}>
+        <div className="" style={{ animationDelay: '1.6s' }}>
           <BlogForm onSubmit={handleBlogSubmit} loading={loading} />
         </div>
 
