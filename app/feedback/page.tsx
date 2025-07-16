@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -238,9 +238,9 @@ export default function FeedbackPage() {
             >
               👨‍🍳
             </motion.div>
-            <p className="text-amber-700 mt-2 font-medium">
-              Your feedback helps us serve you better!
-            </p>
+           <p className="text-amber-700 mt-2 font-medium">
+                 Your feedback helps us serve you better&#39;
+                </p>
           </motion.div>
         </div>
       </div>
