@@ -43,36 +43,52 @@ export default function ShelfPage() {
   };
 
   const handleDownload = (blog: Blog) => {
-    const doc = new jsPDF();
-    doc.setFont("helvetica");
-    doc.setFontSize(18);
-    doc.text("🍽️ Chef Claude's Recipe Collection", 10, 20);
+  const doc = new jsPDF();
 
-    doc.setFontSize(12);
-    let y = 35;
+  doc.setFont("times", "bold");
+  doc.setFontSize(20);
+  doc.text("Chef Subhan's Recipe Collection", 20, 20);
 
-    doc.text("📝 Original Blog Recipe:", 10, y);
+  doc.setFont("times", "normal");
+  doc.setFontSize(12);
+  let y = 35;
+
+  doc.text("Original Blog Recipe:", 20, y);
+  y += 10;
+  const urlLines = doc.splitTextToSize(blog.url || "N/A", 170);
+  doc.text(urlLines, 20, y);
+  y += urlLines.length * 7 + 10;
+
+  doc.text("English Summary (Main Course):", 20, y);
+  y += 10;
+  const summaryLines = doc.splitTextToSize(blog.summary || "N/A", 170);
+  doc.text(summaryLines, 20, y);
+  y += summaryLines.length * 7 + 10;
+
+  if (blog.translation) {
+    doc.text(`${blog.language} Translation (Side Dish):`, 20, y);
     y += 10;
-    const urlLines = doc.splitTextToSize(blog.url || "N/A", 180);
-    doc.text(urlLines, 10, y);
-    y += urlLines.length * 7 + 10;
+    const translationLines = doc.splitTextToSize(blog.translation, 170);
+    doc.text(translationLines, 20, y);
+    y += translationLines.length * 7 + 10;
+  }
 
-    doc.text("🥗 English Summary (Main Course):", 10, y);
-    y += 10;
-    const summaryLines = doc.splitTextToSize(blog.summary || "N/A", 180);
-    doc.text(summaryLines, 10, y);
-    y += summaryLines.length * 7 + 10;
+  // Closing note
+  doc.setFont("times", "italic");
+  doc.setFontSize(11);
+  y += 15;
+  const closing = [
+    "Bon Appétit! This recipe was served fresh from Chef Subhan's kitchen.",
+    "Keep exploring new flavors with every summary you cook up.",
+    "Visit my blog kitchen again for another delightful recipe!"
+  ];
+  const closingLines = doc.splitTextToSize(closing.join("\n"), 170);
+  doc.text(closingLines, 20, y);
 
-    if (blog.translation) {
-      doc.text(`🍛 ${blog.language} Translation (Side Dish):`, 10, y);
-      y += 10;
-      const translationLines = doc.splitTextToSize(blog.translation, 180);
-      doc.text(translationLines, 10, y);
-    }
+  doc.save(`recipe-${blog.id}-${Date.now()}.pdf`);
+  toast.success("Recipe packed for takeaway!");
+};
 
-    doc.save(`recipe-${blog.id}-${Date.now()}.pdf`);
-    toast.success("📦 Recipe packed for takeaway!");
-  };
 
   const handleClearAll = async () => {
     if (window.confirm("🧽 Are you sure you want to clean your entire shelf? This will remove all saved recipes!")) {
