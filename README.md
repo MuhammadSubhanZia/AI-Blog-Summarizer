@@ -63,11 +63,8 @@ I gained:
 ## 🎁 Feedback Shelf is Open
 
 I’d *love* to know — **did I cook well or burn the toast?** 😄
-Drop your feedback, suggest new flavors, or just say hi via:
-
-📫 [LinkedIn](https://www.linkedin.com/in/hafizmuhammadsubhanzia)
-🌐 [Live App]([https://ai-blog-summarizer.vercel.app](https://ai-blog-summarizer-b5bw.vercel.app/))
-📦 [GitHub Repo]([https://github.com/MuhammadSubhanZia/AI-Blog-Summarizer](https://github.com/MuhammadSubhanZia/AI-Blog-Summarizer))
+Drop your feedback, suggest new flavors via
+live app https://ai-blog-summarizer-b5bw.vercel.app/
 
 ---
 
