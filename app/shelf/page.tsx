@@ -43,12 +43,16 @@ export default function ShelfPage() {
   };
 
  const handleDownload = (blog: Blog) => {
-  const doc = new jsPDF();
+ const doc = new jsPDF();
 
   // Title
   doc.setFont("times", "bold");
   doc.setFontSize(20);
-  doc.text("Chef Subhan's Recipe Collection", 20, 20);
+  const title = "Chef Subhan's Recipe Collection";
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const titleWidth = doc.getTextWidth(title);
+  doc.text(title, (pageWidth - titleWidth) / 2, 20);
+
 
   doc.setFont("times", "normal");
   doc.setFontSize(12);
@@ -56,7 +60,7 @@ export default function ShelfPage() {
 
   // Original Blog URL
   doc.setFont("times", "bold");
-  doc.text("📎 Original Blog Recipe:", 20, y);
+  doc.text("Original Blog Recipe:", 20, y);
   y += 8;
   doc.setFont("times", "normal");
   const urlLines = doc.splitTextToSize(blog.url || "N/A", 170);
@@ -65,7 +69,7 @@ export default function ShelfPage() {
 
   // English Summary
   doc.setFont("times", "bold");
-  doc.text("🥗 English Summary (Main Course):", 20, y);
+  doc.text("English Summary (Main Course):", 20, y);
   y += 8;
   doc.setFont("times", "normal");
   const summaryLines = doc.splitTextToSize(blog.summary || "N/A", 170);
@@ -74,9 +78,9 @@ export default function ShelfPage() {
 
   // Closing Note
   const closing = [
-    "🍽️ Bon Appétit! This recipe was served fresh from Chef Subhan's kitchen.",
-    "📚 Keep exploring new flavors with every summary you cook up.",
-    "🌐 Visit the kitchen again for another delightful recipe!"
+    "Bon Appétit! This recipe was served fresh from Chef Subhan's kitchen.",
+    "Keep exploring new flavors with every summary you cook up.",
+    "Visit the kitchen again for another delightful recipe!"
   ];
   const closingLines = doc.splitTextToSize(closing.join("\n"), 170);
 
