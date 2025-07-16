@@ -2,7 +2,7 @@ import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 
 // Securely initialize Resend instance with the API key from env
-const resend = new Resend(process.env.RESEND_API_KEY!);
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API!);
 
 export async function POST(req: NextRequest) {
   const { email, message } = await req.json();
