@@ -65,14 +65,6 @@ export default function ShelfPage() {
   doc.text(summaryLines, 20, y);
   y += summaryLines.length * 7 + 10;
 
-  if (blog.translation) {
-    doc.text(`${blog.language} Translation (Side Dish):`, 20, y);
-    y += 10;
-    const translationLines = doc.splitTextToSize(blog.translation, 170);
-    doc.text(translationLines, 20, y);
-    y += translationLines.length * 7 + 10;
-  }
-
   // Closing note
   doc.setFont("times", "italic");
   doc.setFontSize(11);
