@@ -94,29 +94,6 @@ export default function ShelfPage() {
   toast.success("📄 Recipe packed for takeaway!");
 };
 
-
-
-  const handleClearAll = async () => {
-    if (window.confirm("🧽 Are you sure you want to clean your entire shelf? This will remove all saved recipes!")) {
-      try {
-        const deletePromises = blogs.map(blog => 
-          fetch(`/api/deleteBlog`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: blog.id }),
-          })
-        );
-        
-        await Promise.all(deletePromises);
-        setBlogs([]);
-        toast.success("🧽 Shelf completely cleaned! Sparkling clean!");
-      } catch(error){
-        console.error("Shelf cleanup failed:", error);
-        toast.error("❌ Couldn't clean the shelf completely");
-      }
-    }
-  };
-
   return (
     <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-100 to-red-50 p-6 relative overflow-hidden">
       {/* Kitchen Background Elements */}
