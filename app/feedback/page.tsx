@@ -95,7 +95,7 @@ export default function FeedbackPage() {
               📩 Share Your Recipe Feedback
             </h1>
             <p className="text-lg text-amber-800">
-              We're all ears! Share your culinary thoughts and help us improve.
+              We&apos;re all ears Share your culinary thoughts and help us improve.
             </p>
           </motion.div>
 
