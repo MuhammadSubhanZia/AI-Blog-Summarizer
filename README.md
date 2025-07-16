@@ -62,8 +62,8 @@ I gained:
 
 ## 🎁 Feedback Shelf is Open
 
-I’d *love* to know — **did I cook well or burn the toast?** 😄
-Drop your feedback, suggest new flavors via
+I’d *love* to know **did I cook well or burn the toast?** 😄<br>
+Drop your feedback, suggest new flavors via <br>
 live app https://ai-blog-summarizer-b5bw.vercel.app/
 
 ---
