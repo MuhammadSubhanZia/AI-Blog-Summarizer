@@ -1,8 +1,8 @@
-// app/api/sendFeedback/route.ts
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 
-const resend = new Resend("re_haV8U7So_EoWDYSBJXEYo8JfMLb4Y3yqQ");
+// Securely initialize Resend instance with the API key from env
+const resend = new Resend(process.env.RESEND_API_KEY!);
 
 export async function POST(req: NextRequest) {
   const { email, message } = await req.json();
