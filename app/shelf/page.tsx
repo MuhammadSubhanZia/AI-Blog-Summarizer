@@ -42,9 +42,10 @@ export default function ShelfPage() {
     }
   };
 
-  const handleDownload = (blog: Blog) => {
+ const handleDownload = (blog: Blog) => {
   const doc = new jsPDF();
 
+  // Title
   doc.setFont("times", "bold");
   doc.setFontSize(20);
   doc.text("Chef Subhan's Recipe Collection", 20, 20);
@@ -53,33 +54,42 @@ export default function ShelfPage() {
   doc.setFontSize(12);
   let y = 35;
 
-  doc.text("Original Blog Recipe:", 20, y);
-  y += 10;
+  // Original Blog URL
+  doc.setFont("times", "bold");
+  doc.text("📎 Original Blog Recipe:", 20, y);
+  y += 8;
+  doc.setFont("times", "normal");
   const urlLines = doc.splitTextToSize(blog.url || "N/A", 170);
   doc.text(urlLines, 20, y);
-  y += urlLines.length * 7 + 10;
+  y += urlLines.length * 6 + 8;
 
-  doc.text("English Summary (Main Course):", 20, y);
-  y += 10;
+  // English Summary
+  doc.setFont("times", "bold");
+  doc.text("🥗 English Summary (Main Course):", 20, y);
+  y += 8;
+  doc.setFont("times", "normal");
   const summaryLines = doc.splitTextToSize(blog.summary || "N/A", 170);
   doc.text(summaryLines, 20, y);
-  y += summaryLines.length * 7 + 10;
+  y += summaryLines.length * 6 + 10;
 
-  // Closing note
-  doc.setFont("times", "italic");
-  doc.setFontSize(11);
-  y += 15;
+  // Closing Note
   const closing = [
-    "Bon Appétit! This recipe was served fresh from Chef Subhan's kitchen.",
-    "Keep exploring new flavors with every summary you cook up.",
-    "Visit my blog kitchen again for another delightful recipe!"
+    "🍽️ Bon Appétit! This recipe was served fresh from Chef Subhan's kitchen.",
+    "📚 Keep exploring new flavors with every summary you cook up.",
+    "🌐 Visit the kitchen again for another delightful recipe!"
   ];
   const closingLines = doc.splitTextToSize(closing.join("\n"), 170);
+
+  doc.setFont("times", "italic");
+  doc.setFontSize(11);
+  y += 6; // minimal spacing after summary
   doc.text(closingLines, 20, y);
 
+  // Save
   doc.save(`recipe-${blog.id}-${Date.now()}.pdf`);
-  toast.success("Recipe packed for takeaway!");
+  toast.success("📄 Recipe packed for takeaway!");
 };
+
 
 
   const handleClearAll = async () => {
