@@ -67,7 +67,7 @@ export default function HomePage() {
         <div className="text-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
           <Link href="/shelf">
             <Button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 font-bold animate-pulse-glow">
-              🍱 Visit My Recipe Shelf
+              🚪 Click to Visit My Recipe Shelf
             </Button>
           </Link>
         </div>
