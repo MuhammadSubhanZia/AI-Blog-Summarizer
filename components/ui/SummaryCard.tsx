@@ -53,7 +53,7 @@ export default function SummaryCard({ summary, translated, url, language }: Prop
         <div className="bg-gradient-to-r from-amber-500 to-orange-500 p-6 text-white text-center">
           <div className="text-4xl mb-2">🍽️</div>
           <h2 className="text-3xl font-bold">Your Summary is Ready!</h2>
-          <p className="text-amber-100 mt-2">Fresh from Chef Subhan kitchen</p>
+          <p className="text-amber-100 mt-2">Fresh from Chef Subhan&apos;s kitchen</p>
         </div>
 
         <div className="p-8 space-y-8">
