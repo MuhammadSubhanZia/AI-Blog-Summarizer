@@ -1,4 +1,3 @@
-// components/ui/SummaryCard.tsx
 "use client";
 
 import { useState } from "react";
@@ -15,6 +14,7 @@ interface Props {
 
 export default function SummaryCard({ summary, translated, url, language }: Props) {
   const [saving, setSaving] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
   const [showFullSummary, setShowFullSummary] = useState(false);
   const [showFullTranslation, setShowFullTranslation] = useState(false);
 
@@ -38,6 +38,33 @@ export default function SummaryCard({ summary, translated, url, language }: Prop
       toast.error("❌ Couldn't save your recipe to the shelf. Try again!");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const speakSummary = (type: "en" | "translated") => {
+  if (typeof window !== "undefined" && "speechSynthesis" in window) {
+    window.speechSynthesis.cancel(); // Stop any ongoing speech
+
+    const utterance =
+      type === "en"
+        ? new SpeechSynthesisUtterance(`Here is your English summary: ${summary}`)
+        : new SpeechSynthesisUtterance(`${language} translation: ${translated}`);
+
+    utterance.lang = type === "en" ? "en-US" : (language.toLowerCase().includes("urdu") ? "ur-PK" : "en-US");
+
+    utterance.onend = () => setSpeaking(false);
+
+    setSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  } else {
+    toast.error("Speech synthesis not supported in this browser.");
+  }
+};
+
+  const stopSpeaking = () => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      setSpeaking(false);
     }
   };
 
@@ -140,32 +167,55 @@ export default function SummaryCard({ summary, translated, url, language }: Prop
             </div>
           </div>
 
-          {/* Save Button */}
-          <div className="text-center">
-            <Button
-              onClick={handleSave}
-              disabled={saving}
-              className="w-full max-w-md h-16 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xl font-bold rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-            >
-              {saving ? (
-                <span className="flex items-center gap-3">
-                  <span className="animate-spin text-2xl">🍱</span>
-                  <span>Placing on shelf...</span>
-                </span>
-              ) : (
-                <span className="flex items-center gap-3">
-                  <span className="text-2xl">🍱</span>
-                  <span>Save to Recipe Shelf</span>
-                </span>
-              )}
-            </Button>
-          </div>
+          {/* Buttons: Save + Speak + Stop */}
+          {/* Buttons Row */}
+<div className="flex flex-col md:flex-row md:justify-center md:items-center gap-4 flex-wrap text-center">
+  <Button
+    onClick={handleSave}
+    disabled={saving}
+    className="flex-1 md:max-w-xs h-16 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xl font-bold rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+  >
+    {saving ? (
+      <span className="flex items-center gap-3">
+        <span className="animate-spin text-2xl">🍱</span>
+        <span>Placing on shelf...</span>
+      </span>
+    ) : (
+      <span className="flex items-center gap-3">
+        <span className="text-2xl">🍱</span>
+        <span>Save to Recipe Shelf</span>
+      </span>
+    )}
+  </Button>
+
+  <Button
+    onClick={() => speakSummary("en")}
+    disabled={speaking}
+    className="flex-1 md:max-w-xs h-16 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white text-xl font-bold rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+  >
+    🔈 Listen to English
+  </Button>
+</div>
+
+{/* Stop Button (Only when speaking) */}
+{speaking && (
+  <div className="text-center mt-4">
+    <Button
+      onClick={stopSpeaking}
+      className="w-full md:max-w-xs h-14 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-lg font-semibold rounded-2xl shadow-md transform hover:scale-105 transition-all duration-300"
+    >
+      🛑 Stop Audio
+    </Button>
+  </div>
+)}
+
+
 
           {/* Chef's Note */}
           <div className="bg-gradient-to-r from-amber-100 to-orange-100 rounded-2xl p-6 border-2 border-amber-300 text-center">
             <div className="text-3xl mb-2">👨‍🍳</div>
             <p className="text-amber-800 font-medium text-lg">
-              <span className="font-bold">Chef Subhan Note:</span> Your summary has been carefully prepared with 
+              <span className="font-bold">Chef Subhan Note:</span> Your summary has been carefully prepared with
               the finest ingredients and seasoned with AI precision. Enjoy your meal!
             </p>
           </div>
