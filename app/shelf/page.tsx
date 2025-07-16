@@ -143,15 +143,6 @@ export default function ShelfPage() {
                 🏠 Back to Kitchen
               </Button>
             </Link>
-            
-            {blogs.length > 0 && (
-              <Button 
-                onClick={handleClearAll}
-                className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white text-lg px-8 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 font-bold"
-              >
-                🧽 Clean Entire Shelf
-              </Button>
-            )}
           </div>
         </div>
 
