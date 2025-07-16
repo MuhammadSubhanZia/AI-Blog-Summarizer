@@ -239,7 +239,7 @@ export default function FeedbackPage() {
               👨‍🍳
             </motion.div>
            <p className="text-amber-700 mt-2 font-medium">
-                 Your feedback helps us serve you better&#39;
+                 Your feedback helps us serve you better&#39;s
                 </p>
           </motion.div>
         </div>
